@@ -202,92 +202,99 @@ function ChatClient(p_user, p_channel, p_post_event) {
         }
         el_username.appendChild(document.createTextNode(name));
         el_username.addEventListener('click', evt => {
-            let modal = $('#modcard');
+            if (evt.shiftKey) {
+                let modal = $('#modcard');
 
-            // Set variables for modcard
-            let modal_url = document.getElementById('modal-user');
-            modal_url.textContent = name;
-            modal_url.href = 'https://www.twitch.tv/' + userstate.username;
+                // Set variables for modcard
+                let modal_url = document.getElementById('modal-user');
+                modal_url.textContent = name;
+                modal_url.href = 'https://www.twitch.tv/' + userstate.username;
 
-            // Event handlers
-            let report = evt => {
-                window.open('https://www.twitch.tv/' + userstate.username + '/report_form?description=%0a%0a' + encodeURIComponent(channel) + ' ' + userstate.username + ': ' + message);
-                modal.modal('close');
-                evt.preventDefault();
-            }
-
-            let timeout_helper = (evt, index) => {
-                this.timeout(userstate.username, app_settings.timeout_durations[index]);
-                modal.modal('close');
-                evt.preventDefault();
-            }
-
-            let timeout = [
-                function (evt) {
-                    timeout_helper(evt, 0);
-                },
-                function (evt) {
-                    timeout_helper(evt, 1);
-                },
-                function (evt) {
-                    timeout_helper(evt, 2);
-                },
-                function (evt) {
-                    timeout_helper(evt, 3);
+                // Event handlers
+                let report = evt => {
+                    window.open('https://www.twitch.tv/' + userstate.username + '/report_form?description=%0a%0a' + encodeURIComponent(channel) + ' ' + userstate.username + ': ' + message);
+                    modal.modal('close');
+                    evt.preventDefault();
                 }
-            ];
 
-            let hotkey_handler = evt => {
-                if (document.activeElement !== this.el_whisper_input) {
-                    for (let i = 0; i < app_settings.modcard_hotkeys.length; i += 1) {
-                        if (evt.key === app_settings.modcard_hotkeys[i]) {
-                            document.getElementById('modal-timeout-' + i).click();
+                let timeout_helper = (evt, index) => {
+                    this.timeout(userstate.username, app_settings.timeout_durations[index]);
+                    modal.modal('close');
+                    evt.preventDefault();
+                }
+
+                let timeout = [
+                    function (evt) {
+                        timeout_helper(evt, 0);
+                    },
+                    function (evt) {
+                        timeout_helper(evt, 1);
+                    },
+                    function (evt) {
+                        timeout_helper(evt, 2);
+                    },
+                    function (evt) {
+                        timeout_helper(evt, 3);
+                    }
+                ];
+
+                let hotkey_handler = evt => {
+                    if (document.activeElement !== this.el_whisper_input) {
+                        for (let i = 0; i < app_settings.modcard_hotkeys.length; i += 1) {
+                            if (evt.key === app_settings.modcard_hotkeys[i]) {
+                                document.getElementById('modal-timeout-' + i).click();
+                                modal.modal('close');
+                                evt.preventDefault();
+                                return;
+                            }
+                        }
+                        if (evt.key === app_settings.report_hotkey) {
+                            document.getElementById('modal-report').click();
                             modal.modal('close');
                             evt.preventDefault();
-                            return;
                         }
                     }
-                    if (evt.key === app_settings.report_hotkey) {
-                        document.getElementById('modal-report').click();
-                        modal.modal('close');
-                        evt.preventDefault();
-                    }
                 }
-            }
 
-            // Hook event listeners
-            for (let i = 0; i < app_settings.timeout_durations.length; i += 1) {
-                let timeout_button = document.getElementById('modal-timeout-' + i);
-                timeout_button.addEventListener('click', timeout[i]);
-                timeout_button.textContent = this.get_friendly_duration(app_settings.timeout_durations[i]);
-            }
-            document.getElementById('modal-report').addEventListener('click', report);
-
-            document.addEventListener('keydown', hotkey_handler);
-
-            let modcard_closed = _ => {
-                console.log('modal closed');
-
-                // Unregister event handlers
+                // Hook event listeners
                 for (let i = 0; i < app_settings.timeout_durations.length; i += 1) {
-                    document.getElementById('modal-timeout-' + i).removeEventListener('click', timeout[i]);
+                    let timeout_button = document.getElementById('modal-timeout-' + i);
+                    timeout_button.addEventListener('click', timeout[i]);
+                    timeout_button.textContent = this.get_friendly_duration(app_settings.timeout_durations[i]);
+                }
+                document.getElementById('modal-report').addEventListener('click', report);
+
+                document.addEventListener('keydown', hotkey_handler);
+
+                let modcard_closed = _ => {
+                    console.log('modal closed');
+
+                    // Unregister event handlers
+                    for (let i = 0; i < app_settings.timeout_durations.length; i += 1) {
+                        document.getElementById('modal-timeout-' + i).removeEventListener('click', timeout[i]);
+                    }
+
+                    document.getElementById('modal-report').removeEventListener('click', report);
+                    document.removeEventListener('keydown', hotkey_handler);
+
+                    // Reset whisper input
+                    this.el_whisper_input.value = '';
                 }
 
-                document.getElementById('modal-report').removeEventListener('click', report);
-                document.removeEventListener('keydown', hotkey_handler);
+                // Set current user for whisper input
+                this.el_whisper_input.current_user = userstate.username;
 
-                // Reset whisper input
-                this.el_whisper_input.value = '';
+                // Open modcard
+                modal.modal({
+                    complete: modcard_closed
+                }).modal('open');
+                evt.preventDefault();
+            }
+            else {
+                document.getElementById('chat-feed-input').value += ' @' + userstate.username + ' ';
+                document.getElementById('chat-feed-input').focus();
             }
 
-            // Set current user for whisper input
-            this.el_whisper_input.current_user = userstate.username;
-
-            // Open modcard
-            modal.modal({
-                complete: modcard_closed
-            }).modal('open');
-            evt.preventDefault();
         });
 
         el_row.appendChild(el_username);
