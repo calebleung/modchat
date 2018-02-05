@@ -189,7 +189,7 @@ function PubSub() {
         }
 
         let user = data.args.shift();
-        let message = data.args.join(' ');
+        let message = data.args.shift();
         this.post_event_to_dom('automod', user + ': ' + message, buttons);
     };
 
