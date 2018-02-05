@@ -1,11 +1,11 @@
 var twitchApiBaseUrl = 'https://api.twitch.tv/v5/';
 var twitchApiBaseHeaders = new Headers({
-    'Client-Id': 'ises2vcn10gk4dq0w083d0ortqwdzx',
+    'Client-Id': '73aoqk391f1hr31yopzqvkypshsf65',
     'Accept': 'application/json',
     'Authorization': 'OAuth ' + localStorage.token,
     'Content-Type': 'application/json'
 });
-var twitchApiAuthUrl = 'https://api.twitch.tv/kraken/oauth2/authorize?client_id=ises2vcn10gk4dq0w083d0ortqwdzx&redirect_uri=https%3A%2F%2Ftwitchstuff.3v.fi%2Fmodchat%2F&response_type=token&scope=chat_login';
+var twitchApiAuthUrl = 'https://api.twitch.tv/kraken/oauth2/authorize?client_id=73aoqk391f1hr31yopzqvkypshsf65&redirect_uri=http%3A%2F%2Flocalhost%2F&response_type=token&scope=chat_login';
 
 (function () {
     'use strict';
@@ -39,7 +39,7 @@ var twitchApiAuthUrl = 'https://api.twitch.tv/kraken/oauth2/authorize?client_id=
 
     function load_channel_data(channel_name) {
         console.log('Loading app for channel ' + channel_name);
-        document.getElementById('viewerlist').setAttribute('href', 'https://twitchstuff.3v.fi/chatters/?ch=' + encodeURIComponent(channel_name));
+        //document.getElementById('viewerlist').setAttribute('href', 'https://twitchstuff.3v.fi/chatters/?ch=' + encodeURIComponent(channel_name));
         fetch(twitchApiBaseUrl, { headers: twitchApiBaseHeaders })
             .then(response => response.json())
             .then(function (json) {
