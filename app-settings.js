@@ -5,7 +5,7 @@ var app_settings = {
     timeout_durations: [0, 3600, 600, 1],
     modcard_hotkeys: ['b', 'h', 't', 'p'], // One for each timeout duration in order
     name_colors: true,
-    prompt_reason: false,
+    prompt_reason: true,
     default_reason: '',
     report_hotkey: 'r',
     dark_mode: false
