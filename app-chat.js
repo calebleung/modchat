@@ -291,7 +291,10 @@ function ChatClient(p_user, p_channel, p_post_event) {
                 evt.preventDefault();
             }
             else {
-                document.getElementById('chat-feed-input').value += ' @' + userstate.username + ' ';
+                if (document.getElementById('chat-feed-input').value.length > 0 && document.getElementById('chat-feed-input').value.slice(-1).match(/\s/) == null) {
+                    document.getElementById('chat-feed-input').value += ' ';
+                }
+                document.getElementById('chat-feed-input').value += '@' + userstate.username + ' ';
                 document.getElementById('chat-feed-input').focus();
             }
 
