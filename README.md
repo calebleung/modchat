@@ -5,8 +5,8 @@
 ## Features
 
 * Hold `<ctrl>` to stop chat from scrolling. Release to be taken to latest messages.
-* `<click>` a username to append an `@username` to your message. 
-* `<shift+click>` a username to open a more detailed panel
+* `<click>` a username in Live Chat to append an `@username` to your message. 
+* `<shift+click>` a username in Live Chat to open a more detailed panel
 * `<click>` an emote to append to your message.
 * Removed messages have been strike-through and have less opacity instead of `<message deleted>`. On mouseover, the strike-through is removed for clarity during review.
 
