@@ -36,6 +36,6 @@ Under `Timeouts`, note the following: The first three sliders move at 60 second 
 * Ability to save custom messages for re-use
 * Toggle 
 * Add visual customizations:
- * Text size
- * Line spacing
- * Vertical view  
+  * Text size
+  * Line spacing
+  * Vertical view  
