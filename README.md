@@ -46,3 +46,4 @@ Not at feature parity with regular Twitch chat:
 
 * No emote list
 * Emotes sent from client are not parsed on client-side as emotes. Displays properly to everyone else.
+* No full viewer list. (Original code used a third-party.)
