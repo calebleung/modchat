@@ -73,15 +73,24 @@ function ChatClient(p_user, p_channel, p_post_event) {
     this.timeout = (user, duration, reason) => {
         if (typeof reason !== "string") {
             if (app_settings.prompt_reason) {
+                let el = document.getElementById('reason-prompt-input');
+                let submit = false;
+                el.addEventListener('keydown', evt => {
+                    if (evt.key === 'Enter') {
+                        submit = true;
+                    }
+                })
                 $('#reason-prompt').modal({
                     ready: (modal, trigger) => {
-                        let el = document.getElementById('reason-prompt-input');
                         el.focus();
                         el.select();
                     },
                     complete: _ => {
-                        let el = document.getElementById('reason-prompt-input');
-                        this.timeout(user, duration, el.value);
+                        if (submit) {
+                            this.timeout(user, duration, el.value);
+                            el.value = '';
+                        }
+                        submit = false;
                     }
                 }).modal('open');
             } else {
@@ -362,7 +371,7 @@ function ChatClient(p_user, p_channel, p_post_event) {
                     tooltip: emote_code
                 });
 
-                el_img.addEventListener('click', function () {
+                el_img.addEventListener('click', evt => {
                     let chEl = document.getElementById('chat-feed-input');
                     if (chEl.value.length > 0 && chEl.value.slice(-1).match(/\s/) == null) {
                         chEl.value += ' ';
