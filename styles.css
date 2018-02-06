@@ -57,6 +57,11 @@
 }
 .faded .chat-message {
     opacity: 0.25;
+    text-decoration: line-through;
+}
+.faded .chat-message:hover {
+    opacity: 0.25;
+    text-decoration: none;
 }
 .username {
     cursor: pointer;
