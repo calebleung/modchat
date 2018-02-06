@@ -362,6 +362,15 @@ function ChatClient(p_user, p_channel, p_post_event) {
                     tooltip: emote_code
                 });
 
+                el_img.addEventListener('click', function () {
+                    let chEl = document.getElementById('chat-feed-input');
+                    if (chEl.value.length > 0 && chEl.value.slice(-1).match(/\s/) == null) {
+                        chEl.value += ' ';
+                    }
+                    chEl.value += emote_code + ' ';
+                    chEl.focus();
+                });
+
                 split_text.splice(occurrence[0], 1, el_img);
             }
         }
