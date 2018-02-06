@@ -213,6 +213,10 @@ function ChatClient(p_user, p_channel, p_post_event) {
             el_username.appendChild(el_badges[i]);
         }
         el_username.appendChild(document.createTextNode(name));
+
+        let time = new Date();
+        el_username.setAttribute('title', ('0' + time.getHours()).slice(-2) + ':' + ('0' + time.getMinutes()).slice(-2) + ':' + ('0' + time.getSeconds()).slice(-2));
+
         el_username.addEventListener('click', evt => {
             if (evt.shiftKey) {
                 document.getSelection().removeAllRanges();

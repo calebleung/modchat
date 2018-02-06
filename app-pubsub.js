@@ -92,6 +92,8 @@ function PubSub() {
         this.dedupe.shift();
         this.dedupe.push(dupekey);
 
+        let time = new Date();
+
         // Create row
         let el_row = document.createElement('div');
         el_row.classList.add('row');
@@ -103,8 +105,14 @@ function PubSub() {
         // Create first column data
         let el_type = document.createElement('span');
         el_type.classList.add(this.color[type] || "black");
-        el_type.classList.add('darken-3', 'badge', 'new');
+        el_type.classList.add('darken-3', 'badge', 'new', 'tooltipped');
         el_type.setAttribute('data-badge-caption', '');
+
+        $(el_type).tooltip({
+            delay: 50,
+            position: 'top',
+            tooltip: ('0' + time.getHours()).slice(-2) + ':' + ('0' + time.getMinutes()).slice(-2) + ':' + ('0' + time.getSeconds()).slice(-2)
+        });
 
         // Add children to parents
         el_type.appendChild(document.createTextNode(type));
