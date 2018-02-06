@@ -34,7 +34,7 @@ Under `Timeouts`, note the following: The first three sliders move at 60 second 
 
 * Resolve Known Issues
 * Last `<x>` messages from `@username` to detailed panel of said user.
-* Input field similar to whisper that is the same as regular chat but already includes an `@username`
+* Input field in detailed panel that is similar to whisper. Basically, same as regular chat but already includes an `@username`.
 * Ability to save custom messages for re-use
 * Add a toggle option for `<ctrl>` pause
 * Add visual customizations:
