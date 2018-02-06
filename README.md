@@ -4,6 +4,7 @@
 
 ## Features
 
+* Hold `<ctrl>` to stop chat from scrolling. Release to be taken to latest messages.
 * `<click>` a username to append an `@username` to your message. 
 * `<shift+click>` a username to open a more detailed panel
 * `<click>` an emote to append to your message.
@@ -31,10 +32,11 @@ Under `Timeouts`, note the following: The first three sliders move at 60 second 
 
 ## To Do
 
+* Resolve Known Issues
 * Last `<x>` messages from `@username` to detailed panel of said user.
 * Input field similar to whisper that is the same as regular chat but already includes an `@username`
 * Ability to save custom messages for re-use
-* Toggle 
+* Add a toggle option for `<ctrl>` pause
 * Add visual customizations:
   * Text size
   * Line spacing
@@ -47,3 +49,5 @@ Not at feature parity with regular Twitch chat:
 * No emote list
 * Emotes sent from client are not parsed on client-side as emotes. Displays properly to everyone else.
 * No full viewer list. (Original code used a third-party.)
+* No tab-completion for usernames.
+* No highlighting for usernames.
