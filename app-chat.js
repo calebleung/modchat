@@ -80,6 +80,9 @@ function ChatClient(p_user, p_channel, p_post_event) {
                         submit = true;
                     }
                 })
+
+                el.labels[0].innerHTML += ' for mod action against <strong>' + user + '</strong>:';
+
                 $('#reason-prompt').modal({
                     ready: (modal, trigger) => {
                         el.focus();
