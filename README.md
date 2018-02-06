@@ -9,6 +9,8 @@
 * `<shift+click>` a username in Live Chat to open a more detailed panel
 * `<click>` an emote to append to your message.
 * Removed messages have been strike-through and have less opacity instead of `<message deleted>`. On mouseover, the strike-through is removed for clarity during review.
+* Mouseover Events badges (System, Mod, etc) for timestamp.
+* Mouseover usernames in Live Chat for timestamp.
 
 ## Shortcuts
 
