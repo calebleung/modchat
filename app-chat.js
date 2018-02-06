@@ -81,7 +81,7 @@ function ChatClient(p_user, p_channel, p_post_event) {
                     },
                     complete: _ => {
                         let el = document.getElementById('reason-prompt-input');
-                        //this.timeout(user, duration, el.value);
+                        this.timeout(user, duration, el.value);
                     }
                 }).modal('open');
             } else {
@@ -203,6 +203,7 @@ function ChatClient(p_user, p_channel, p_post_event) {
         el_username.appendChild(document.createTextNode(name));
         el_username.addEventListener('click', evt => {
             if (evt.shiftKey) {
+                document.getSelection().removeAllRanges();
                 let modal = $('#modcard');
 
                 // Set variables for modcard
@@ -444,6 +445,10 @@ function ChatClient(p_user, p_channel, p_post_event) {
 
     this.el_input.addEventListener('keydown', evt => {
         if (evt.key === 'Enter') {
+            if (this.el_input.value.length == 0) {
+                Materialize.toast('Message can\'t be blank!', 500);
+                return;
+            }
             if (this.el_input.value.length > 500) {
                 Materialize.toast('Message too long!', 500);
                 return;
