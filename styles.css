@@ -33,6 +33,9 @@
 .chat-message {
     overflow-wrap: normal;
 }
+#nav-userchannel {
+    padding: 0 0.5rem;
+}
 #events .badge,
 #automod .badge {
     margin: 0;

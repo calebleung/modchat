@@ -40,6 +40,7 @@ var twitchApiAuthUrl = 'https://api.twitch.tv/kraken/oauth2/authorize?client_id=
     function load_channel_data(channel_name) {
         console.log('Loading app for channel ' + channel_name);
         //document.getElementById('viewerlist').setAttribute('href', 'https://twitchstuff.3v.fi/chatters/?ch=' + encodeURIComponent(channel_name));
+
         fetch(twitchApiBaseUrl, { headers: twitchApiBaseHeaders })
             .then(response => response.json())
             .then(function (json) {
@@ -73,6 +74,8 @@ var twitchApiAuthUrl = 'https://api.twitch.tv/kraken/oauth2/authorize?client_id=
     }
 
     function load_app() {
+        document.getElementById('nav-userchannel').innerHTML = user.display_name + ' :: #' + channel.display_name;
+
         pubsub.listen('chat_moderator_actions.' + user._id + '.' + channel._id);
         var tmiclient = new ChatClient(user, channel, pubsub.post_event_to_dom);
         tmiclient.connect();
