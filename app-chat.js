@@ -303,7 +303,7 @@ function ChatClient(p_user, p_channel, p_post_event) {
 
                     // Reset whisper input
                     this.el_whisper_input.value = '';
-                    this.el_message_user_input.value = '';
+                    //this.el_message_user_input.value = '';
                 }
 
                 // Set current user for whisper input
