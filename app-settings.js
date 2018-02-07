@@ -1,5 +1,5 @@
 var app_settings = {
-    version: 7,
+    version: 8,
     hover_notification: true,
     use_high_res_emotes: false,
     timeout_durations: [0, 3600, 600, 1],
@@ -9,7 +9,8 @@ var app_settings = {
     default_reason: '',
     report_hotkey: 'r',
     dark_mode: false,
-    toggle_ctrl: false
+    toggle_ctrl: false,
+    merge_events: false
 };
 
 (function () {
@@ -51,6 +52,7 @@ var app_settings = {
     document.getElementById('report-hotkey').value = app_settings.report_hotkey;
     document.getElementById('dark-mode').checked = app_settings.dark_mode;
     document.getElementById('toggle-ctrl').checked = app_settings.toggle_ctrl;
+    document.getElementById('merge-events').checked = app_settings.merge_events;
 
     for (let i = 0; i < app_settings.timeout_durations.length; i += 1) {
         let input = document.getElementById('timeout-setting-' + i);
@@ -101,6 +103,10 @@ var app_settings = {
     });
     document.getElementById('toggle-ctrl').addEventListener('change', function () {
         app_settings.toggle_ctrl = this.checked;
+    });
+    document.getElementById('merge-events').addEventListener('change', function () {
+        app_settings.merge_events = this.checked;
+        Materialize.toast('Requires refresh to take effect.', 1000);
     });
     document.getElementById('save-settings').addEventListener('click', function () {
         localStorage.setItem('settings', JSON.stringify(app_settings));

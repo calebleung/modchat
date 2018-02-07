@@ -108,6 +108,10 @@ function PubSub() {
         el_type.classList.add('darken-3', 'badge', 'new', 'tooltipped');
         el_type.setAttribute('data-badge-caption', '');
 
+        if (app_settings.merge_events) {
+            el_type.setAttribute('style', 'margin-top: 0');
+        }
+
         $(el_type).tooltip({
             delay: 50,
             position: 'top',
@@ -140,6 +144,13 @@ function PubSub() {
 
         // Add to feed
         let el_feed = document.getElementById('events');
+
+        if (app_settings.merge_events) {
+            el_feed = document.getElementById('chat-feed');
+            el_feed.setAttribute('style', 'height: calc(90vh - 9rem)');
+            $('#events').parent().hide()
+        }
+
         el_feed.appendChild(el_row);
 
         // Remove excess elements from the feed
