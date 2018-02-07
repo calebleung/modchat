@@ -161,10 +161,16 @@ function ChatClient(p_user, p_channel, p_post_event) {
 
                 let badge_data = this.badge_sets[badge].versions[userstate.badges[badge]];
                 el_badge.src = badge_data[app_settings.use_high_res_emotes ? "image_url_2x" : "image_url_1x"];
+
+                let badge_description = badge_data.description;
+                if (badge_data.description == ' ') {
+                    badge_description = badge_data.title;
+                }
+
                 $(el_badge).tooltip({
                     delay: 50,
                     position: 'top',
-                    tooltip: badge_data.description
+                    tooltip: badge_description
                 });
                 el_badges.push(el_badge);
             }
