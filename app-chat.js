@@ -3,6 +3,7 @@ function ChatClient(p_user, p_channel, p_post_event) {
 
     this.el_input = document.getElementById('chat-feed-input');
     this.el_whisper_input = document.getElementById('whisper-input');
+    this.el_message_user_input = document.getElementById('mention-user-input');
     this.history = ['', '', '', '', '', '', '', '', '', ''];
     this.history_index = this.history.length;
     this.user = p_user;
@@ -256,7 +257,7 @@ function ChatClient(p_user, p_channel, p_post_event) {
                 ];
 
                 let hotkey_handler = evt => {
-                    if (document.activeElement !== this.el_whisper_input) {
+                    if (document.activeElement !== this.el_whisper_input && document.activeElement !== this.el_message_user_input) {
                         for (let i = 0; i < app_settings.modcard_hotkeys.length; i += 1) {
                             if (evt.key === app_settings.modcard_hotkeys[i]) {
                                 document.getElementById('modal-timeout-' + i).click();
@@ -296,6 +297,7 @@ function ChatClient(p_user, p_channel, p_post_event) {
 
                     // Reset whisper input
                     this.el_whisper_input.value = '';
+                    this.el_message_user_input.value = '';
                 }
 
                 // Set current user for whisper input

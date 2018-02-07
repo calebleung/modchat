@@ -1,5 +1,5 @@
 var app_settings = {
-    version: 6,
+    version: 7,
     hover_notification: true,
     use_high_res_emotes: false,
     timeout_durations: [0, 3600, 600, 1],
@@ -8,7 +8,8 @@ var app_settings = {
     prompt_reason: true,
     default_reason: '',
     report_hotkey: 'r',
-    dark_mode: false
+    dark_mode: false,
+    toggle_ctrl: false
 };
 
 (function () {
@@ -27,9 +28,17 @@ var app_settings = {
             app_settings = settings;
             Materialize.toast('Loaded settings', 2500);
         } else {
+            settings['version'] = app_settings['version'];
+            for (let val in app_settings) {
+                if (typeof(settings[val]) == 'undefined') {
+                    settings[val] = app_settings[val];
+                }
+            }
+            Materialize.toast('New settings have been added.', 10000);
+            localStorage.setItem('settings', JSON.stringify(app_settings));
             /// TODO: upgrade process: apply relevant settings on top of default app_settings
-            Materialize.toast('Settings level upgraded. Settings reset to avoid conflicts.', 10000);
-            localStorage.removeItem('settings');
+            //Materialize.toast('Settings level upgraded. Settings reset to avoid conflicts.', 10000);
+            //localStorage.removeItem('settings');
         }
     }
 
@@ -41,6 +50,7 @@ var app_settings = {
     document.getElementById('default-reason').value = app_settings.default_reason;
     document.getElementById('report-hotkey').value = app_settings.report_hotkey;
     document.getElementById('dark-mode').checked = app_settings.dark_mode;
+    document.getElementById('toggle-ctrl').checked = app_settings.toggle_ctrl;
 
     for (let i = 0; i < app_settings.timeout_durations.length; i += 1) {
         let input = document.getElementById('timeout-setting-' + i);
@@ -88,6 +98,9 @@ var app_settings = {
         } else {
             el_html.classList.remove('theme--dark');
         }
+    });
+    document.getElementById('toggle-ctrl').addEventListener('change', function () {
+        app_settings.toggle_ctrl = this.checked;
     });
     document.getElementById('save-settings').addEventListener('click', function () {
         localStorage.setItem('settings', JSON.stringify(app_settings));

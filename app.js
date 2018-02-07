@@ -14,6 +14,8 @@ var twitchApiAuthUrl = 'https://api.twitch.tv/kraken/oauth2/authorize?client_id=
     var user = {};
     var pubsub = new PubSub();
 
+    var ctrlActive = false;
+
     function initialize() {
         // Initialize app
 
@@ -85,6 +87,10 @@ var twitchApiAuthUrl = 'https://api.twitch.tv/kraken/oauth2/authorize?client_id=
     let feeds = document.getElementsByClassName('feed');
     let pause_icons = document.getElementsByClassName('pause');
     document.addEventListener('keydown', function (e) {
+        if (app_settings.toggle_ctrl) {
+            ctrlActive = !ctrlActive;
+        }
+
         let keyName = e.key || e.char;
         if (keyName === 'Control') {
             for (let i = 0; i < feeds.length; i += 1) {
@@ -94,6 +100,10 @@ var twitchApiAuthUrl = 'https://api.twitch.tv/kraken/oauth2/authorize?client_id=
         }
     });
     document.addEventListener('keyup', function (e) {
+        if (ctrlActive) {
+            return;
+        }
+
         let keyName = e.key || e.char;
         if (keyName === 'Control') {
             for (let i = 0; i < feeds.length; i += 1) {
