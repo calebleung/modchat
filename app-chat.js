@@ -82,7 +82,7 @@ function ChatClient(p_user, p_channel, p_post_event) {
                     }
                 })
 
-                el.labels[0].innerHTML += ' for mod action against <strong>' + user + '</strong>:';
+                document.getElementById('reason-user').innerHTML = user;
 
                 $('#reason-prompt').modal({
                     ready: (modal, trigger) => {
