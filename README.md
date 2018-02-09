@@ -11,6 +11,7 @@
 * Removed messages have been strike-through and have less opacity instead of `<message deleted>`. On mouseover, the strike-through is removed for clarity during review.
 * Mouseover Events badges (System, Mod, etc) for timestamp.
 * Mouseover usernames in Live Chat for timestamp.
+* Saves last 5 messages that a user has said.
 
 ## Shortcuts
 
@@ -35,7 +36,6 @@ Under `Timeouts`, note the following: The first three sliders move at 60 second 
 ## To Do
 
 * Resolve Known Issues
-* Last `<x>` messages from `@username` to detailed panel of said user.
 * Input field in detailed panel that is similar to whisper. Basically, same as regular chat but already includes an `@username`.
 * Ability to save custom messages for re-use
 * Add visual customizations:

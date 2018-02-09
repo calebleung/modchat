@@ -144,11 +144,14 @@ function ChatClient(p_user, p_channel, p_post_event) {
             return;
         }
 
+        let msg_id = nonce(10);
+
         /* create row */
 
         let el_row = document.createElement('div');
         el_row.classList.add('row');
         el_row.setAttribute('data-username', userstate.username);
+        el_row.setAttribute('id', msg_id);
 
         /* badge images */
 
@@ -221,8 +224,17 @@ function ChatClient(p_user, p_channel, p_post_event) {
         }
         el_username.appendChild(document.createTextNode(name));
 
-        let time = new Date();
-        el_username.setAttribute('title', ('0' + time.getHours()).slice(-2) + ':' + ('0' + time.getMinutes()).slice(-2) + ':' + ('0' + time.getSeconds()).slice(-2));
+        let date = new Date();
+        let time = ('0' + date.getHours()).slice(-2) + ':' + ('0' + date.getMinutes()).slice(-2) + ':' + ('0' + date.getSeconds()).slice(-2);
+        el_username.setAttribute('title', time);
+
+        add_msg({
+            user: userstate.username,
+            timestamp: date.toLocaleDateString() + ' ' + time,
+            msg: message,
+            msg_id: msg_id,
+            channel: this.channel.name
+        });
 
         el_username.addEventListener('click', evt => {
             if (evt.shiftKey) {
@@ -232,7 +244,31 @@ function ChatClient(p_user, p_channel, p_post_event) {
                 // Set variables for modcard
                 let modal_url = document.getElementById('modal-user');
                 modal_url.textContent = name;
-                modal_url.href = 'https://www.twitch.tv/' + userstate.username;
+                //modal_url.href = 'https://www.twitch.tv/' + userstate.username;
+
+                // Setup message history
+                let msg_history = refresh_modal({user: userstate.username, channel: this.channel.name});
+                let el_history = document.getElementById('modal-messages');
+                el_history.innerHTML = '';
+
+                for (let i = 0; i < msg_history.length; i++) {
+                    let row = document.createElement('div');
+                    row.classList.add('row');
+
+                    let col = document.createElement('span');
+                    col.classList.add('chat-message');
+
+
+                    let text = document.createElement('span');
+                    //el_text.classList.add('flex-text');
+
+                    text.appendChild(document.createTextNode('[' + msg_history[i].timestamp + '] ' + msg_history[i].msg));
+
+                    col.appendChild(text);
+                    row.appendChild(col);
+
+                    document.getElementById('modal-messages').appendChild(row);
+                }
 
                 // Event handlers
                 let report = evt => {
@@ -263,7 +299,7 @@ function ChatClient(p_user, p_channel, p_post_event) {
                 ];
 
                 let hotkey_handler = evt => {
-                    if (document.activeElement !== this.el_whisper_input && document.activeElement !== this.el_message_user_input) {
+                    if (document.activeElement !== this.el_whisper_input && document.activeElement !== this.el_message_user_input && !evt.metaKey && !evt.ctrlKey) {
                         for (let i = 0; i < app_settings.modcard_hotkeys.length; i += 1) {
                             if (evt.key === app_settings.modcard_hotkeys[i]) {
                                 document.getElementById('modal-timeout-' + i).click();

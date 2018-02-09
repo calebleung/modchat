@@ -41,6 +41,10 @@
     margin: 0;
     text-transform: uppercase;
 }
+#modal-messages {
+    height: 20vh;
+    overflow: scroll;
+}
 .btn {
     max-width: 100%;
 }

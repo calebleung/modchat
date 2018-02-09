@@ -140,7 +140,7 @@
                 <div class="collapsible-header"><i class="material-icons">schedule</i>Timeouts</div>
                 <div class="collapsible-body">
                     <p class="flow-text">
-                        Timeout duratios in seconds per button from left to right. 0 means permanent ban.
+                        Timeout durations in seconds per button from left to right. 0 means permanent ban.
                     </p>
                     <p class="range-field">
                         <input type="range" id="timeout-setting-0" min="0" max="7200" step="60">
@@ -192,6 +192,18 @@
                     </div>
                 </div>
             </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">trending_up</i>Database</div>
+                <div class="collapsible-body">
+                    <p class="flow-text">
+                        Database Size:
+                    </p>
+                    <p class="flow-text" id="database-size">
+                        <span>0 KB</span>
+                    </p>
+                    <button id="database-clear" class="btn waves-effect waves-light">Clear DB <i class="material-icons left">report</i></button>
+                </div>
+            </li>
         </ul>
         <button class="btn waves-effect waves-light" id="save-settings">Save <i class="material-icons left">save</i></button>
     </div>
@@ -216,12 +228,16 @@
 
 <div id="modcard" class="modal">
     <div class="modal-content">
-        <h4><a href="#" id="modal-user"></a></h4>
-        <a href="#" class="btn-flat waves-effect waves-red" id="modal-timeout-0">Ban</a>
-        <a href="#" class="btn-flat waves-effect waves-red" id="modal-timeout-1">1h</a>
-        <a href="#" class="btn-flat waves-effect waves-red" id="modal-timeout-2">10m</a>
-        <a href="#" class="btn-flat waves-effect waves-red" id="modal-timeout-3">1s</a>
-        <a href="#" class="btn-flat waves-effect waves-red" id="modal-report">Report</a>
+        <h4><a id="modal-user"></a></h4>
+            <span>
+                <a href="#" class="btn-flat waves-effect waves-red" id="modal-timeout-0">Ban</a>
+                <a href="#" class="btn-flat waves-effect waves-red" id="modal-timeout-1">1h</a>
+                <a href="#" class="btn-flat waves-effect waves-red" id="modal-timeout-2">10m</a>
+                <a href="#" class="btn-flat waves-effect waves-red" id="modal-timeout-3">1s</a>
+                <a href="#" class="btn-flat waves-effect waves-red" id="modal-report">Report</a>
+            <div id="modal-messages">
+            </div>
+        </span>
         <div class="input-field">
             <input id="whisper-input" type="text">
             <label for="whisper-input">Whisper</label>
@@ -247,9 +263,11 @@
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lokijs/1.5.2/lokijs.min.js"></script>
 <script src="https://cdn.tmijs.org/js/1.2.1/tmi.min.js" integrity="sha384-eE0n7sm1W7DOUI2Xh5I4qSpZTe6hupAO0ovLfqEy0yVJtGRBNfssdmjbJhEYm6Bw"
     crossorigin="anonymous"></script>
 <script src="app-settings.js?_=4etwDEpCDJecfyKOryFGCNV"></script>
+<script src="app-history.js?_=4etwDEpCDJecfyKOryFGCNV"></script>
 <script src="app-pubsub.js?_=4etwDEpCDJecfyKOryFGCNV"></script>
 <script src="app-chat.js?_=4etwDEpCDJecfyKOryFGCNV"></script>
 <script src="app.js?_=4etwDEpCDJecfyKOryFGCNV"></script>

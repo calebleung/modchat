@@ -75,6 +75,11 @@ var app_settings = {
     }
 
     // Listen for changes
+    document.getElementById('open-settings').addEventListener('click', function() {
+        let storage_size = get_localStorage_size();
+        document.getElementById('database-size').innerHTML = '';
+        document.getElementById('database-size').appendChild(document.createTextNode(storage_size));
+    });
     document.getElementById('hover-notification').addEventListener('change', function () {
         app_settings.hover_notification = this.checked;
     });
@@ -108,8 +113,14 @@ var app_settings = {
         app_settings.merge_events = this.checked;
         Materialize.toast('Requires refresh to take effect.', 1000);
     });
+    document.getElementById('database-clear').addEventListener('click', function () {
+        clear_database();
+        Materialize.toast('The database has been cleared!', 1000);
+        $('#settings').modal('close');
+    });
     document.getElementById('save-settings').addEventListener('click', function () {
         localStorage.setItem('settings', JSON.stringify(app_settings));
         Materialize.toast('Settings saved! Please note some settings require a refresh to take effect.', 5000);
+        $('#settings').modal('close');
     });
 })();
