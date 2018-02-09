@@ -42,6 +42,7 @@ Under `Timeouts`, note the following: The first three sliders move at 60 second 
   * Text size
   * Line spacing
   * Vertical view  
+* Track infractions
 
 ## Known Issues
 
