@@ -80,6 +80,20 @@ var app_settings = {
         document.getElementById('database-size').innerHTML = '';
         document.getElementById('database-size').appendChild(document.createTextNode(storage_size));
     });
+    document.getElementById('backup-export').addEventListener('click', function () {
+        document.getElementById('backup-settings').value = JSON.stringify(app_settings);
+        document.getElementById('backup-settings').select();
+    });
+    document.getElementById('backup-import').addEventListener('click', function () {
+        try {
+            let backup_settings = document.getElementById('backup-settings').value;
+            JSON.parse(backup_settings);
+            localStorage.setItem('settings', backup_settings);
+            Materialize.toast('Settings imported. Refresh now.', 5000);
+        } catch (e) {
+            Materialize.toast('JSON did not parse. Settings remain unchanged.', 5000);
+        }
+    });
     document.getElementById('hover-notification').addEventListener('change', function () {
         app_settings.hover_notification = this.checked;
     });
