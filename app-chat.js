@@ -513,6 +513,9 @@ function ChatClient(p_user, p_channel, p_post_event) {
     });
 
     this.el_input.addEventListener('keydown', evt => {
+        if (tribute.isActive) {
+            return;
+        }
         if (evt.key === 'Enter') {
             if (this.el_input.value.length == 0) {
                 Materialize.toast('Message can\'t be blank!', 500);

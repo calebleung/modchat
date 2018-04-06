@@ -17,15 +17,43 @@ var db = new loki('msg_history.db', {
     autosaveInterval: 10000
 });
 
+var channel_name = window.location.hash.substring(1);
+
+var tribute = new Tribute({
+    values: [],
+});
+
+tribute.attach(document.getElementById('chat-feed-input'));
+
+function tribute_init() {
+    let all_msgs = db_users.find({channel: channel_name});
+    let users = [];
+    let user = '';
+
+    for (let i = 0; i < all_msgs.length; i++) {
+        user = all_msgs[i]['user'];
+        if (!users.includes(user)) {
+            add_autocomplete_user(user)
+            users.push(user);
+        }
+    }
+}
+
 function db_init() {
     if (!db.getCollection('users')) {
         db.addCollection('users', {indices: ['users']});
     }
 
     db_users = db.getCollection('users');
+
+    tribute_init();
 }
 
 function add_msg(data) {
+    if (db_users.count({user: data.user, channel: data.channel}) == 0) {
+        add_autocomplete_user(data.user);
+    }
+
     if (db_users.count({user: data.user, channel: data.channel}) > 4) {
         db_users.findAndRemove({
             msg_id: db_users.findOne({user: data.user, channel: data.channel}).msg_id
@@ -40,6 +68,12 @@ function refresh_modal(data) {
 
 function clear_database() {
     db_users.clear();
+}
+
+function add_autocomplete_user(user) {
+    tribute.append(0, [
+        {key: user, value: user}
+    ]);
 }
 
 // from https://stackoverflow.com/a/17887889
