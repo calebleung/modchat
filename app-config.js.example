@@ -1,0 +1,11 @@
+var clientID = 'clientID';
+var redirectURL = 'http://127.0.0.1:8000/';
+
+var twitchApiBaseUrl = 'https://api.twitch.tv/v5/';
+var twitchApiBaseHeaders = new Headers({
+    'Client-Id': clientID,
+    'Accept': 'application/json',
+    'Authorization': 'OAuth ' + localStorage.token,
+    'Content-Type': 'application/json'
+});
+var twitchApiAuthUrl = 'https://api.twitch.tv/kraken/oauth2/authorize?client_id=' + clientID + '&redirect_uri=' + encodeURIComponent(redirectURL) + '&response_type=token&scope=chat_login';
