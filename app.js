@@ -1,12 +1,3 @@
-var twitchApiBaseUrl = 'https://api.twitch.tv/v5/';
-var twitchApiBaseHeaders = new Headers({
-    'Client-Id': '73aoqk391f1hr31yopzqvkypshsf65',
-    'Accept': 'application/json',
-    'Authorization': 'OAuth ' + localStorage.token,
-    'Content-Type': 'application/json'
-});
-var twitchApiAuthUrl = 'https://api.twitch.tv/kraken/oauth2/authorize?client_id=73aoqk391f1hr31yopzqvkypshsf65&redirect_uri=http%3A%2F%2Flocalhost%2F&response_type=token&scope=chat_login';
-
 (function () {
     'use strict';
 
