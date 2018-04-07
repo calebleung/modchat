@@ -23,13 +23,16 @@ var tribute = new Tribute({
     values: [],
 });
 
+var users = [];
+
 tribute.attach(document.getElementById('chat-feed-input'));
 
 function tribute_init() {
     let all_msgs = db_users.find({channel: channel_name});
-    let users = [];
-    let user = '';
+    
+    add_autocomplete_user(channel_name);
 
+/*
     for (let i = 0; i < all_msgs.length; i++) {
         user = all_msgs[i]['user'];
         if (!users.includes(user)) {
@@ -37,6 +40,7 @@ function tribute_init() {
             users.push(user);
         }
     }
+*/
 }
 
 function db_init() {
@@ -50,7 +54,7 @@ function db_init() {
 }
 
 function add_msg(data) {
-    if (db_users.count({user: data.user, channel: data.channel}) == 0) {
+    if (!users.includes(data.user)) {
         add_autocomplete_user(data.user);
     }
 
@@ -74,6 +78,7 @@ function add_autocomplete_user(user) {
     tribute.append(0, [
         {key: user, value: user}
     ]);
+    users.push(user);
 }
 
 // from https://stackoverflow.com/a/17887889
