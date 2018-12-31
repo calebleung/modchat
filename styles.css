@@ -133,3 +133,6 @@
 .active .mention_username{
     color:#fff;
     }
+.chat-state-off {
+	display:none;
+}
