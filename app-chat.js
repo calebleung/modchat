@@ -53,21 +53,22 @@ function ChatClient(p_user, p_channel, p_post_event) {
         this.post_event('whisper', (userstate['badges-raw'] ? '[' + userstate['badges-raw'].split('/')[0] + ']' : '') + from.substring(1) + ': ' + message);
     });
 
-	function checkRoomstate(el, showState) {
-		let attributes = el.getAttribute('class');
-		if (showState) {
-			if (attributes.search('chat-state-off') < 0) {
-				let attributesArray = attributes.split(' ');
-				attributesArray.splice(attributesArray.indexOf('chat-state-off'), 1);
-				attributes = attributesArray.join(' 
-				el.setAttribute('class', attributes);
-			}
-		} else {
-			if (attributes.search('chat-state-off') < 0) {
-				el.setAttribute('class', el.getAttribute('class') + ' chat-state-off');
-			}
-		}
-	}
+    function checkRoomstate(el, showState) {
+return;
+        let attributes = el.getAttribute('class');
+        if (showState) {
+            if (attributes.search('chat-state-off') < 0) {
+                let attributesArray = attributes.split(' ');
+                attributesArray.splice(attributesArray.indexOf('chat-state-off'), 1);
+                attributes = attributesArray.join(' '); 
+                el.setAttribute('class', attributes);
+            }
+        } else {
+            if (attributes.search('chat-state-off') < 0) {
+                el.setAttribute('class', el.getAttribute('class') + ' chat-state-off');
+            }
+        }
+    };
 
     this.cs.on('roomstate', (channel, state) => {
         Object.keys(state).forEach(key => {

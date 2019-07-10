@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name=viewport content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tributejs/3.2.0/tribute.min.css">
+<link rel="stylesheet" href="styles.css?_=BrGGY5ZV3eKxvQBcLjNWg68">
+<title>Moderator Chat</title>
+
+<section id="menu">
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper purple darken-3">
+                <ul id="nav-mobile" class="left">
+                    <li class="hide-on-small-only">                        
+                    </li>
+                    <li>
+                        <a href="#" id="open-settings"><i class="material-icons">settings</i></a>
+                    </li>
+                    <li>
+                        <span id="nav-userchannel"></span>
+                    </li>
+                    <li>
+                        <a href="#" class="no-op">
+                            <span id="state-followers-only" class="new badge black tooltipped chat-state-off"
+                                data-position="bottom" data-delay="50" data-tooltip="Followers Only; users must have been following for this many minutes to chat" data-badge-caption="Follow">
+                                NF
+                            </span>
+                            <span id="state-emote-only" class="new badge black tooltipped chat-state-off"
+                                data-position="bottom" data-delay="50" data-tooltip="Emote Only; only emotes can be posted by normal users" data-badge-caption="Emote">
+                                NF
+                            </span>
+                            <span id="state-subs-only" class="new badge black tooltipped chat-state-off"
+                                data-position="bottom" data-delay="50" data-tooltip="Subscribers Only; only subscribers can chat" data-badge-caption="Sub">
+                                NF
+                            </span>
+                            <span id="state-slow" class="new badge black tooltipped chat-state-off"
+                                data-position="bottom" data-delay="50" data-tooltip="Slow Mode; users must wait this many seconds between their messages" data-badge-caption="Slow">
+                                NF
+                            </span>
+                            <span id="state-r9k" class="new badge black tooltipped chat-state-off"
+                                data-position="bottom" data-delay="50" data-tooltip="ROBOT 9000 unique message enforcement" data-badge-caption="R9K">
+                                NF
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</section>
+
+<section id="app">
+    <ul class="collapsible" data-collapsible="expandable">
+        <li>
+            <div class="collapsible-header active"><i class="material-icons">timeline</i>Events <i class="material-icons pause hidden right">pause</i></div>
+            <div class="collapsible-body feed strip-pad" id="events"></div>
+        </li>
+        <li>
+            <div class="collapsible-header active"><i class="material-icons">chat</i>Live Chat <i class="material-icons pause hidden right">pause</i></div>
+            <div class="collapsible-body strip-pad" id="chat">
+                <div id="chat-feed" class="feed"></div>
+                <div class="input-field">
+                    <input type="text" id="chat-feed-input" data-length="500">
+                    <label for="chat-feed-input">Message or command to send</label>
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
+
+<div id="settings" class="modal">
+    <div class="modal-content">
+        <p class="flow-text">
+            Most settings take effect immediately after changing the setting, but will not save across refreshes until you choose to save.
+            Some settings may require a save and refresh.
+        </p>
+        <ul class="collapsible" data-collapsible="accordion">
+            <li>
+                <div class="collapsible-header"><i class="material-icons">backup</i>Import &amp; Export</div>
+                <div class="collapsible-body">
+                    <input type="text" id="backup-settings" placeholder="settings object {...}">
+                    <button id="backup-import" class="btn waves-effect waves-light">Import Settings <i class="material-icons left">settings_backup_restore</i></button>
+                    <hr>
+                    <button id="backup-export" class="btn waves-effect waves-light">Export Settings <i class="material-icons left">get_app</i></button>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">speaker_notes</i>Features</div>
+                <div class="collapsible-body">
+                    <div class="switch">
+                        <label>
+                            <input type="checkbox" id="merge-events">
+                            <span class="lever"></span>
+                            Merge events and live chat to same feed
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="switch">
+                        <label>
+                            <input type="checkbox" id="hover-notification">
+                            <span class="lever"></span>
+                            Show notification on CTRL pause
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="switch">
+                        <label>
+                            <input type="checkbox" id="toggle-ctrl">
+                            <span class="lever"></span>
+                            CTRL pause is a toggle instead of hold
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="switch">
+                        <label>
+                            <input type="checkbox" id="highres-emotes">
+                            <span class="lever"></span>
+                            Use higher resolution emote images
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="switch">
+                        <label>
+                            <input type="checkbox" id="name-colors">
+                            <span class="lever"></span>
+                            Show name colors
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="switch">
+                        <label>
+                            <input type="checkbox" id="dark-mode">
+                            <span class="lever"></span>
+                            Dark mode
+                        </label>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">schedule</i>Timeouts</div>
+                <div class="collapsible-body">
+                    <p class="flow-text">
+                        Timeout durations in seconds per button from left to right. 0 means permanent ban.
+                    </p>
+                    <p class="range-field">
+                        <input type="range" id="timeout-setting-0" min="0" max="7200" step="60">
+                    </p>
+                    <p class="range-field hide-on-small-only">
+                        <input type="range" id="timeout-setting-1" min="0" max="7200" step="60">
+                    </p>
+                    <p class="range-field hide-on-med-and-down">
+                        <input type="range" id="timeout-setting-2" min="0" max="7200" step="60">
+                    </p>
+                    <p class="range-field hide-on-med-and-down">
+                        <input type="range" id="timeout-setting-3" min="0" max="7200" step="1">
+                    </p>
+                    <hr>
+                    <p class="flow-text">
+                        Hotkeys for timeout durations and other actions in the modcards. Combinations are currently <strong>not</strong> supported.
+                    </p>
+                    <div class="input-field">
+                        <input id="timeout-hotkey-0" type="text" data-length="1">
+                        <label for="timeout-hotkey-0">Timeout Hotkey 1 (default b)</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="timeout-hotkey-1" type="text" data-length="1">
+                        <label for="timeout-hotkey-1">Timeout Hotkey 2 (default h)</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="timeout-hotkey-2" type="text" data-length="1">
+                        <label for="timeout-hotkey-2">Timeout Hotkey 3 (default t)</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="timeout-hotkey-3" type="text" data-length="1">
+                        <label for="timeout-hotkey-3">Timeout Hotkey 4 (default p)</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="report-hotkey" type="text" data-length="1">
+                        <label for="report-hotkey">Report Hotkey (default r)</label>
+                    </div>
+                    <hr>
+                    <div class="switch">
+                        <label>
+                            <input type="checkbox" id="prompt-reason">
+                            <span class="lever"></span>
+                            Prompt for custom reason
+                        </label>
+                    </div>
+                    <div class="input-field">
+                        <input id="default-reason" type="text" data-length="200">
+                        <label for="default-reason">Default Timeout/Ban Reason</label>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">trending_up</i>Database</div>
+                <div class="collapsible-body">
+                    <p class="flow-text">
+                        Database Size:
+                    </p>
+                    <p class="flow-text" id="database-size">
+                        <span>0 KB</span>
+                    </p>
+                    <button id="database-clear" class="btn waves-effect waves-light">Clear DB <i class="material-icons left">report</i></button>
+                    <label>The current configuration is not meant to go over 60,000 KB.</label>
+                </div>
+            </li>
+        </ul>
+        <button class="btn waves-effect waves-light" id="save-settings">Save <i class="material-icons left">save</i></button>
+    </div>
+</div>
+
+<div id="channel-prompt" class="modal">
+    <div class="modal-content">
+        <p class="flow-text">
+            You haven't selected a channel or the channel was
+            <span class="hint tooltipped" data-position="top" data-delay="50" data-tooltip="non-existent, deleted or suspended">invalid</span>.
+            Please select a channel to connect to.
+        </p>
+        <div class="input-field">
+            <input id="channel-prompt-input" type="text">
+            <label for="channel-prompt-input">Channel Name</label>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat"><i class="material-icons">send</i></a>
+        </div>
+    </div>
+</div>
+
+<div id="modcard" class="modal">
+    <div class="modal-content">
+        <h4><a id="modal-user"></a></h4>
+            <span>
+                <a href="#" class="btn-flat waves-effect waves-red" id="modal-timeout-0">Ban</a>
+                <a href="#" class="btn-flat waves-effect waves-red" id="modal-timeout-1">1h</a>
+                <a href="#" class="btn-flat waves-effect waves-red" id="modal-timeout-2">10m</a>
+                <a href="#" class="btn-flat waves-effect waves-red" id="modal-timeout-3">1s</a>
+                <a href="#" class="btn-flat waves-effect waves-red" id="modal-report">Report</a>
+            <div id="modal-messages">
+            </div>
+        </span>
+        <div class="input-field">
+            <input id="whisper-input" type="text">
+            <label for="whisper-input">Whisper</label>
+        </div>
+        <!--
+        <div class="input-field">
+            <input id="mention-user-input" type="text">
+            <label for="mention-user-input">Message to </label>
+        </div>
+        -->
+    </div>
+</div>
+
+<div id="reason-prompt" class="modal">
+    <div class="modal-content">
+        <h4><a id="reason-user"></a></h4>
+        <div class="input-field">
+            <input id="reason-prompt-input" type="text" data-length="200">
+            <label for="reason-prompt-input">Reason</label>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lokijs/1.5.2/lokijs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tributejs/3.2.0/tribute.min.js"></script>
+<script src="./tmi.js"></script>
+<!--<script src="https://cdn.tmijs.org/js/1.2.1/tmi.min.js" integrity="sha384-eE0n7sm1W7DOUI2Xh5I4qSpZTe6hupAO0ovLfqEy0yVJtGRBNfssdmjbJhEYm6Bw"
+    crossorigin="anonymous"></script>-->
+<script src="app-config2.js?_=Fxieu1rDtwFL72GkrpUn"></script>
+<script src="app-settings.js?_=Fxieu1rDtwFL72GkrpUn"></script>
+<script src="app-history.js?_=Fxieu1rDtwFL72GkrpUn"></script>
+<script src="app-pubsub2.js?_=Fxieu1rDtwFL72GkrpUn"></script>
+<script src="app-chat.js?_=Fxieu1rDtwFL72GkrpUn"></script>
+<script src="app2.js?_=Fxieu1rDtwFL72GkrpUn"></script>
