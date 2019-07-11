@@ -29,8 +29,8 @@ function PubSub() {
 
         this.ws.onmessage = event => {
             let json = JSON.parse(event.data);
-			//console.log('json on msg', json);
-            //console.log('data on msg', json.data);
+			console.log('json on msg', json);
+            console.log('data on msg', json.data);
             if (json.type === 'MESSAGE') {
                 let data = JSON.parse(json.data.message);
                 if (data.data.moderation_action === 'automod_rejected') {
