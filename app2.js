@@ -117,7 +117,7 @@
         evt.preventDefault();
     });
     document.getElementById('createClipAnchor').addEventListener('click', function (evt) {
-        createClip(channel._id);
+        createClip(localStorage.token, channel._id);
         evt.preventDefault();
     });
 
