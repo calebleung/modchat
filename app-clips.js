@@ -13,6 +13,6 @@ function createClip(token, broadcaster_id) {
         .then(response => response.json())
         .then(json => {
             console.log('clips', json);
-            document.getElementById('clippy').innerHTML = `Your clip will be available at <a href="https://clips.twitch.tv/${json.data[0].id}" target="_blank">https://clips.twitch.tv/${json.data[0].id}</a>. <br />This may take a couple seconds/minutes for Twitch to generate.`;
+            document.getElementById('clippy').innerHTML = `Your clip will be available at <a href="https://clips.twitch.tv/${json.data[0].id}" target="_blank">https://clips.twitch.tv/${json.data[0].id}</a>. <br />This may take a couple seconds/minutes for Twitch to generate. <a href="https://www.twitch.tv/manager/clips" target="_blank">Clip Manager</a>`;
         });
 }
