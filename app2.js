@@ -70,6 +70,7 @@
         document.getElementById('nav-userchannel').innerHTML = user.display_name + ' :: #' + channel.display_name;
 
         pubsub.listen('chat_moderator_actions.' + user._id + '.' + channel._id);
+        pubsub.listen(`channel-bits-events-v1.${channel._id}`);
         var tmiclient = new ChatClient(user, channel, pubsub.post_event_to_dom);
         tmiclient.connect();
     }
