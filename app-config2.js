@@ -8,4 +8,4 @@ var twitchApiBaseHeaders = new Headers({
     'Authorization': 'OAuth ' + localStorage.token,
     'Content-Type': 'application/json'
 });
-var twitchApiAuthUrl = 'https://api.twitch.tv/kraken/oauth2/authorize?client_id=' + clientID + '&redirect_uri=' + encodeURIComponent(redirectURL) + '&response_type=token&scope=channel:moderate+chat:edit+chat:read+whispers:read+whispers:edit+chat_login+bits:read';
+var twitchApiAuthUrl = 'https://api.twitch.tv/kraken/oauth2/authorize?client_id=' + clientID + '&redirect_uri=' + encodeURIComponent(redirectURL) + '&response_type=token&scope=channel:moderate+chat:edit+chat:read+whispers:read+whispers:edit+chat_login+bits:read+clips:edit';
