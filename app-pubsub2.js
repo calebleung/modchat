@@ -66,7 +66,7 @@ function PubSub() {
                 auth_token: localStorage.token
             }
         };
-        console.log('json message', message);
+        console.log('liste topic', message);
         this.send_json(message);
     };
 
