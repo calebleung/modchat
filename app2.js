@@ -116,6 +116,10 @@
         $('#settings').modal().modal('open');
         evt.preventDefault();
     });
+    document.getElementById('createClipAnchor').addEventListener('click', function (evt) {
+        createClip(channel._id);
+        evt.preventDefault();
+    });
 
     let noops = document.getElementsByClassName('no-op');
     for (let i = 0; i < noops.length; i += 1) {
