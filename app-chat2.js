@@ -160,13 +160,13 @@ return;
     this.unescape_tag = tag => tag || tag.replace(/\\:/g, ';').replace(/\\s/g, ' ').replace(/\\\\/g, '\\').replace(/[\\r\\n]/g, '\u2424');
 
     this.cs.on('cheer', (channel, userstate, msg) => {
-	console.log('cheer!!!!', userstate);
-	console.log('cheer!!!!', msg);
-/*
- * userstate['bits'] = "10"
- * userstate['username' = "username"
- *
- */
+        console.log('cheer!!!!', userstate);
+        console.log('cheer!!!!', msg);
+    /*
+     * userstate['bits'] = "10"
+     * userstate['username' = "username"
+     *
+     */
     });
 
     this.cs.on('message', (channel, userstate, message, self) => {
