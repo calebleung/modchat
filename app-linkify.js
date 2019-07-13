@@ -1,4 +1,4 @@
-function linkifylinkifyEscape(str) {
+function linkifyEscape(str) {
       return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
