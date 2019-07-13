@@ -398,7 +398,6 @@ return;
 
         let el_col = document.createElement('span');
         el_col.classList.add('chat-message');
-        message = setLinkifiedContent(message);
         let el_coldata = this.format_emotes(message, userstate.emotes);
         el_coldata.forEach(el => {
             el_col.appendChild(el);
