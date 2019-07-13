@@ -2,7 +2,7 @@ function linkifylinkifyEscape(str) {
       return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-function setLinkifiedContent(selector, content) {
+function setLinkifiedContent(content) {
     var out     = linkifyEscape(content),
         matches = linkify.match(content),
         result  = [],
@@ -27,5 +27,5 @@ function setLinkifiedContent(selector, content) {
         out = result.join('');
     }
 
-    document.getElementById(selector).innerHTML = out;
+    return out;
 }

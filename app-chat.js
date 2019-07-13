@@ -251,7 +251,8 @@ return;
         add_msg({
             user: userstate.username,
             timestamp: date.toLocaleDateString() + ' ' + time,
-            msg: message,
+            //msg: message,
+            msg: setLinkifiedContent(message),
             msg_id: msg_id,
             channel: this.channel.name
         });
