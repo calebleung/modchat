@@ -47,6 +47,7 @@ function ChatClient(p_user, p_channel, p_post_event) {
 
     this.cs.on('notice', (channel, msgid, message) => this.post_to_dom(message));
     this.cs.on('mods', (channel, mods) => this.post_to_dom('Mods: ' + mods.join(', ')));
+    this.cs.on('messagedeleted', (channel, username, deletedMessage, userstate) => this.post_to_dom('Message from ' + username + ' deleted: ' + deletedMessage));
 
     this.cs.on('whisper', (from, userstate, message, self) => {
         if (self) return;
